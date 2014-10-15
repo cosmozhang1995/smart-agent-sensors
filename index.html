@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
+	<title>Smart Agent - Create Application</title>
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="lib/jquery-fullpage/jquery.fullPage.css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+	<div id="header" class="header">
+		<div class="container">
+			<div class="row">
+				<div class="page-header">
+					<h1>Smart Agent <small>创建应用</small></h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="full-page">
+		<div class="section active" id="main">
+			<div id="sensors" class="slide active">
+				<div class="slide-container">
+					<div class="container">
+						<div class="row">
+							<h2>触发器</h2>
+						</div>
+						<div id="sensor-group-list">
+						</div>
+						<div class="row">
+							<div class="panel panel-default panel-btn" id="panel-add">
+								<div class="panel-body">
+									<div class="container">
+										<div class="row">
+											<i class="glyphicon glyphicon-plus"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row bottom-btn-row">
+							<button class="btn btn-default">开始</button>
+							<button class="btn btn-default pull-right nav-next" name="nav-next">下一步&nbsp;<i class="glyphicon glyphicon-arrow-right"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="operators" class="slide">
+				<div class="container">
+					<div class="row">
+						<h2>执行器</h2>
+					</div>
+					<div class="row">
+						<div id="operator-list" class="operator-list">
+							<button type="button" class="btn btn-icon btn-default btn-add" id="btn-add-operator">
+								<div class="btn-content"><i class="glyphicon glyphicon-plus"></i></div>
+							</button>
+						</div>
+					</div>
+					<div class="row bottom-btn-row">
+						<button class="btn btn-default nav-prev" name="nav-prev"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;上一步</button>
+						<button class="btn btn-default pull-right nav-next" name="nav-next">下一步&nbsp;<i class="glyphicon glyphicon-arrow-right"></i></button>
+					</div>
+				</div>
+			</div>
+			<div id="configurations" class="slide">
+				<div class="container">
+					<div class="row">
+						<h2>应用配置</h2>
+					</div>
+					<div class="row">
+						<div id="configuration-list" class="configuration-list">
+						</div>
+					</div>
+					<div class="row bottom-btn-row">
+						<button class="btn btn-default nav-prev" name="nav-prev"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;上一步</button>
+						<button class="btn btn-primary pull-right" name="btn-complete" id="btn-complete">完成&nbsp;<i class="glyphicon glyphicon-arrow-right"></i></button>
+					</div>
+				</div>
+			</div>
+			<div id="complete" class="slide">
+				<div class="container" style="text-align:center;">
+					<div class="row">
+						<h1>应用已经生效</h1>
+					</div>
+					<!-- <div class="row bottom-btn-row" style="text-align:center;">
+						<button class="btn btn-danger" name="btn-close" id="btn-close" onclick="this.close();">关闭</button>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="add-sensor">
+						<div class="title-bar">Haha</div>
+						<div class="sensor-icon" id="sensor-icon" style="position:absolute; left:0px; top:0px;" data-toggle="tooltip" data-placement="bottom" title="Tooltip on left"><img src="img/sensor/bbs.png"/></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="lib/jquery.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/jquery-fullpage/jquery.fullPage.min.js"></script>
+<script type="text/javascript" src="js/drag.js"></script>
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</html>

@@ -1,0 +1,145 @@
+.header {
+  background-color: #f0f0ff;
+  padding: 0 5px;
+  font-size: 16px;
+  text-align: center;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 999; }
+
+.main-container {
+  margin-top: 73px;
+  margin-bottom: 53px; }
+
+.sensor-group {
+  border-bottom: 1px #cccccc solid; }
+
+.sensor-list-container {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: scroll; }
+
+.sensor-list {
+  padding: 10px;
+  width: auto;
+  height: auto;
+  min-height: 80px;
+  display: inline-block;
+  white-space: nowrap; }
+
+.button {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  margin: 5px; }
+
+.button-inline {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  margin-left: 10px; }
+
+.button-inline:first-child {
+  margin-left: 0px; }
+
+.button-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px; }
+
+.button-icon img {
+  width: 100%;
+  height: 100%; }
+
+.collapse-form-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 10px;
+  overflow: visible;
+  margin-top: 5px;
+  display: none; }
+
+.collapse-form, .collapse-form-arrow, .collapse-form-arrow-mask {
+  background-color: #f6f6f6; }
+
+.collapse-form, .collapse-form-arrow {
+  box-shadow: 0 0 5px 0 #666666 inset; }
+
+.collapse-form {
+  display: block;
+  margin-left: -5px;
+  margin-right: -5px;
+  padding: 10px 15px;
+  position: relative; }
+
+.collapse-form-arrow, .collapse-form-arrow-mask {
+  width: 14.14px;
+  height: 14.14px;
+  position: absolute;
+  left: 50%;
+  margin-left: -10px;
+  transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%; }
+
+.collapse-form-arrow {
+  top: -7.07214px; }
+
+.collapse-form-arrow-mask {
+  top: -3.53607px; }
+
+.add-sensor-group-button {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 0 3px 0 #666666;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  font-size: 20px; }
+
+.top-drawer {
+  width: 100%;
+  vertical-align: middle;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 0 3px 0 #666666;
+  position: fixed;
+  top: 40px;
+  left: 0px;
+  z-index: 900; }
+
+.top-drawer-handle {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 14px; }
+
+.top-drawer-body {
+  height: 0px;
+  width: 100%;
+  overflow: scroll; }
+
+.top-drawer-sensor-list {
+  height: auto;
+  width: 100%; }
+
+/*# sourceMappingURL=style-mobile.css.map */
