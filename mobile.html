@@ -10,17 +10,54 @@
 </head>
 <body>
 	<div class="header" id="header">
-		Smart Agent
+		<a href="javascript:void(0);" class="action-nav nav-prev" id="nav-prev">上一步</a>
+		<span class="title" id="title">Smart Agent - 触发器</span>
+		<a href="javascript:void(0);" class="action-nav nav-next" id="nav-next">下一步</a>
 	</div>
 	<div class="top-drawer" id="top-drawer">
 		<div class="top-drawer-body" id="top-drawer-body">
-			<div class="top-drawer-sensor-list" id="top-drawer-sensor-list"></div>
+			<div class="top-drawer-list" id="top-drawer-list"></div>
 		</div>
 		<div class="top-drawer-handle" id="top-drawer-handle"><i class="glyphicon glyphicon-th"></i></div>
 	</div>
-	<div class="container-fluid main-container">
-		<div class="row">
-			<div class="sensor-group-list" id="sensor-group-list">
+	<div class="container-fluid main-container" id="fullpage">
+		<div class="row section" id="section">
+			<div class="container-fluid slide sensors-container" id="sensors-container">
+				<div class="row">
+					<div class="sensor-group-list" id="sensor-group-list">
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid slide operators-container" id="operators-container">
+				<div class="row">
+					<div class="operator-list-container" id="operator-list-container">
+						<div class="operator-list" id="operator-list">
+						</div>
+					</div>
+					<div class="operator-config-dialog-container" id="operator-config-dialog-container">
+						<div class="operator-config-dialog">
+							<div class="operator-config-form" id="operator-config-form"></div>
+						</div>
+						<div class="collapse-form-arrow-container collapse-form-arrow-container-left" id="operator-config-dialog-arrow-container">
+							<div class="collapse-form-arrow"></div>
+							<div class="collapse-form-arrow-mask"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid slide configurations-container" id="configurations-container">
+				<div class="row">
+					<div class="col-xs-12 configuration-list" id="configuration-list">
+					</div>
+				</div>
+			</div>
+			<div class="confirmation-container" id="confirmation-container">
+				<canvas class="confirmation-canvas" id="confirmation-canvas"></canvas>
+			</div>
+			<div class="completion-container" id="completion-container">
+				<div class="completion">
+					<p class="text-success">应用已生效</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -31,6 +68,7 @@
 <script type="text/javascript" src="lib/jquery.min.js"></script>
 <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="lib/jquery-fullpage/jquery.fullPage.min.js"></script>
+<script type="text/javascript" src="lib/dollar.js"></script>
 <script type="text/javascript" src="js/drag.js"></script>
 <script type="text/javascript" src="js/utils.js"></script>
 <script type="text/javascript" src="js/main-mobile.js"></script>

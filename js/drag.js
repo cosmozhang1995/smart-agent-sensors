@@ -8,7 +8,8 @@ $.fn.drag = function(opts) {
 		'z-index': 999,
 		'delay': 0,
 		'el': null,
-		'direction': 'horizontal|vertical'
+		'direction': 'horizontal|vertical',
+		'on': true
 	};
 	if (opts) $.extend(options, opts);
 
@@ -26,7 +27,8 @@ $.fn.drag = function(opts) {
 			"left": null,
 			"opacity": null,
 			"z-index": null
-		}
+		},
+		el: null
 	};
 
 	var saveStyle = function(ele) {
@@ -57,9 +59,17 @@ $.fn.drag = function(opts) {
 		}
 	})();
 
+	$(this).off('touchstart.drag');
+	$(this).off('touchmove.drag');
+	$(this).off('touchend.drag');
+	$(this).off('mousedown.drag');
+	$(this).off('mousemove.drag');
+	$(this).off('mouseup.drag');
 	if (options.touch === true) {
 		$(this).on('touchstart.drag', function(e) {
+			if ($(this).data('dragPause') === true) return true;
 			e.preventDefault();
+			e.stopPropagation();
 			var thisRef = this;
 			delay_timer = setTimeout(function(){
 				e.preventDefault();
@@ -69,6 +79,7 @@ $.fn.drag = function(opts) {
 				start.y = e.originalEvent.touches[0].pageY;
 				start.left = $(thisRef).offset().left;
 				start.top = $(thisRef).offset().top;
+				start.el = thisRef;
 			
 				clone = options.el || $(thisRef).clone();
 				clone.css('position', 'absolute');
@@ -88,6 +99,7 @@ $.fn.drag = function(opts) {
 		});
 	
 		$(document).on('touchmove.drag', function(e) {
+			if ($(this).data('dragPause') === true) return true;
 			clearTimeout(delay_timer);
 			if (in_drag) {
 				e.preventDefault();
@@ -102,10 +114,16 @@ $.fn.drag = function(opts) {
 		});
 	
 		$(document).on('touchend.drag', function(e) {
+			if ($(this).data('dragPause') === true) return true;
 			clearTimeout(delay_timer);
 			if (in_drag) {
-				e.preventDefault();
-				e.stopPropagation();
+				if (e.originalEvent.changedTouches[0].pageX !== start.x || e.originalEvent.changedTouches[0].pageY !== start.y) {
+					e.preventDefault();
+					e.stopPropagation();
+				} else {
+					$(start.el).trigger('click');
+					$(start.el).parents().trigger('click');
+				}
 	
 				in_drag = false;
 				clone.animate({
@@ -121,7 +139,9 @@ $.fn.drag = function(opts) {
 		});
 	} else {
 		$(this).on('mousedown.drag', function(e) {
+			if ($(this).data('dragPause') === true) return true;
 			e.preventDefault();
+			e.stopPropagation();
 			var thisRef = this;
 			delay_timer = setTimeout(function(){
 				e.preventDefault();
@@ -131,6 +151,7 @@ $.fn.drag = function(opts) {
 				start.y = e.pageY;
 				start.left = $(thisRef).offset().left;
 				start.top = $(thisRef).offset().top;
+				start.el = thisRef;
 			
 				clone = options.el || $(thisRef).clone();
 				clone.css('position', 'absolute');
@@ -147,6 +168,7 @@ $.fn.drag = function(opts) {
 		});
 	
 		$(document).on('mousemove.drag', function(e) {
+			if ($(this).data('dragPause') === true) return true;
 			clearTimeout(delay_timer);
 			if (in_drag) {
 				e.preventDefault();
@@ -162,10 +184,16 @@ $.fn.drag = function(opts) {
 		});
 	
 		$(document).on('mouseup.drag', function(e) {
+			if ($(this).data('dragPause') === true) return true;
 			clearTimeout(delay_timer);
 			if (in_drag) {
-				e.preventDefault();
-				e.stopPropagation();
+				if (e.pageX !== start.x || e.pageY !== start.y) {
+					e.preventDefault();
+					e.stopPropagation();
+				} else {
+					$(start.el).trigger('click');
+					$(start.el).parents().trigger('click');
+				}
 	
 				in_drag = false;
 				clone.animate({
@@ -180,4 +208,10 @@ $.fn.drag = function(opts) {
 			}
 		});
 	}
+}
+$.fn.drag.pause = function() {
+	$(this).data('dragPause', true);
+}
+$.fn.drag.resume = function() {
+	$(this).data('dragPause', false);
 }

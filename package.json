@@ -1,0 +1,16 @@
+{
+  "name": "smart-agent-sensors",
+  "version": "0.0.1",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:cosmozhang1995/smart-agent-sensors.git"
+  },
+  "author": "cosmozhang",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "0.x",
+    "grunt-contrib-sass": "0.x"
+  }
+}

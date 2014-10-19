@@ -1,4 +1,46 @@
 // ===================================================================
+// Global utils
+// 
+collapseFormArrow = function() {
+	var EVENT = 'touchmove.collapseFormArrow';
+	$(document).off(EVENT);
+	$(document).on(EVENT, function(e) {
+		$('.collapse-form-arrow-container').each(function() {
+			if ($(this).data('pointTo') instanceof jQuery) {
+				var pointToOffset = $(this).data('pointTo').offset();
+				pointToOffset.right = pointToOffset.left + $(this).data('pointTo').width();
+				pointToOffset.bottom = pointToOffset.top + $(this).data('pointTo').height();
+				// var specOffset = {
+				// 	x: (typeof $(this).data('specOffsetX') === "number") ? (typeof $(this).data('specOffsetX') === "number") : 0,
+				// 	y: (typeof $(this).data('specOffsetY') === "number") ? (typeof $(this).data('specOffsetY') === "number") : 0
+				// }
+				var specOffset = {x:0,y:0};
+				$(this).parents().each(function(){
+					if ($(this).css('position') !== "static") {
+						specOffset.x = -$(this).offset().left;
+						specOffset.y = -$(this).offset().top;
+						return false;
+					}
+					return true;
+				});
+				if ($(this).hasClass('collapse-form-arrow-container-left') || $(this).hasClass('collapse-form-arrow-container-right')) {
+					$(this).css('top', ((pointToOffset.top + pointToOffset.bottom)/2 + specOffset.y) + 'px');
+				} else if ($(this).hasClass('collapse-form-arrow-container-top') || $(this).hasClass('collapse-form-arrow-container-bottom')) {
+					$(this).css('left', ((pointToOffset.right + pointToOffset.left)/2 + specOffset.x) + 'px');
+				}
+			}
+		});
+	});
+	collapseFormArrow.trigger = function() {
+		$(document).trigger(EVENT);
+	};
+	// setTimeout(function(){collapseFormArrow.trigger()}, 1);
+};
+$(document).ready(function() {
+	collapseFormArrow();
+});
+
+// ===================================================================
 // View defines
 // ===================================================================
 
@@ -95,349 +137,6 @@ sensor_repository_mock = [
 	{
 		name: "bbs",
 		displayName: "BBS",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor1",
-		displayName: "传感器 1",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor2",
-		displayName: "传感器 2",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	}
-	,
-	{
-		name: "sensor1",
-		displayName: "传感器 1",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor2",
-		displayName: "传感器 2",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor1",
-		displayName: "传感器 1",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor2",
-		displayName: "传感器 2",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor1",
-		displayName: "传感器 1",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor2",
-		displayName: "传感器 2",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor1",
-		displayName: "传感器 1",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor2",
-		displayName: "传感器 2",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor1",
-		displayName: "传感器 1",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor2",
-		displayName: "传感器 2",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor1",
-		displayName: "传感器 1",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor2",
-		displayName: "传感器 2",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor1",
-		displayName: "传感器 1",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor2",
-		displayName: "传感器 2",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor1",
-		displayName: "传感器 1",
-		icon: "img/sensor/bbs.png",
-		fields: [
-			{
-				name: "title",
-				displayName: "帖子名",
-				viewClass: TextField,
-				defaultValue: ""
-			},
-			{
-				name: "keywords",
-				displayName: "关键字",
-				viewClass: TextField,
-				defaultValue: ""
-			}
-		]
-	},
-	{
-		name: "sensor2",
-		displayName: "传感器 2",
 		icon: "img/sensor/bbs.png",
 		fields: [
 			{
@@ -674,7 +373,9 @@ app_configuration_options = [
 				}
 				this.group.formEl.html('');
 				dialog.appendTo(this.group.formEl);
-				this.group.formContainerEl.find('.collapse-form-arrow, .collapse-form-arrow-mask').css('left', (this.el.offset().left + this.el.outerWidth()/2) + 'px');
+				this.group.formContainerEl.find('.collapse-form-arrow-container').data('pointTo', this.el);
+				collapseFormArrow.trigger();
+				// this.group.formContainerEl.find('.collapse-form-arrow, .collapse-form-arrow-mask').css('left', (this.el.offset().left + this.el.outerWidth()/2) + 'px');
 				this.group.formContainerEl.data('sensor', this);
 				this.group.formContainerEl.data('fields', fields);
 				this.group.formContainerEl.slideDown(200, function(){
@@ -736,9 +437,11 @@ app_configuration_options = [
 
 /* Operator class define */
 (function() {
-	Operator = function(name) {
+	Operator = function(name, opts) {
 		var thisRef = this;
 		this.name = name;
+		this.dialogContainer = opts.dialogContainer;
+		this.arrowContainer = opts.arrowContainer;
 		this._init = function() {
 			this.operator_obj = operator_repository.findBy('name', this.name);
 			if (!this.operator_obj)
@@ -751,7 +454,6 @@ app_configuration_options = [
 				"img-src":this.operator_obj.icon,
 				"displayName":this.operator_obj.displayName
 			}));
-			this.el.tooltip();
 			this.el.data("operator", this);
 
 			this._bind();
@@ -761,39 +463,53 @@ app_configuration_options = [
 			this.el.on('click.' + Operator.spacename, function(e){
 				thisRef.configDialog();
 			});
-			this.el.drag({
-				opacity: 0.5,
-				mousemoveCallback: function(e) {
-					var trashIconSize = 20;
-					var trashIconDistance = 1;
+			// this.el.drag({
+			// 	opacity: 0.5,
+			// 	touch: true,
+			// 	direction: 'horizontal',
+			// 	mousemoveCallback: function(e) {
+			// 		var trashIconSize = 20;
+			// 		var trashIconDistance = 1;
 
-					var elSpec = thisRef.el.parents('.operator-list').offset();
-					elSpec.right = thisRef.el.parents('.operator-list').outerWidth() + elSpec.left;
-					elSpec.bottom = thisRef.el.parents('.operator-list').outerHeight() + elSpec.top;
-					if (e.pageX < elSpec.left || e.pageX > elSpec.right || e.pageY < elSpec.top || e.pageY > elSpec.bottom) {
-						$('#drag-trash-image').remove();
-						var img = $('<img id="drag-trash-image" src="img/cancel_deny.png" style="position:absolute; top:' + (e.pageY + trashIconDistance) + 'px; left:' + (e.pageX - (trashIconSize + trashIconDistance)) + 'px; width:' + trashIconSize + 'px; height:' + trashIconSize + 'px; z-index:999;" />');
-						img.appendTo("body");
-					} else {
-						$('#drag-trash-image').remove();
-					}
-				},
-				mouseupCallback: function(e) {
-					$('#drag-trash-image').remove();
-					var elSpec = thisRef.el.parents('.operator-list').offset();
-					elSpec.right = thisRef.el.outerWidth() + elSpec.left;
-					elSpec.bottom = thisRef.el.outerHeight() + elSpec.top;
-					if (e.pageX < elSpec.left || e.pageX > elSpec.right || e.pageY < elSpec.top || e.pageY > elSpec.bottom) {
-						thisRef.destroy();
-					}
-				}
-			});
+			// 		var elSpec = thisRef.el.parents('.operator-list').offset();
+			// 		elSpec.right = thisRef.el.parents('.operator-list').outerWidth() + elSpec.left;
+			// 		elSpec.bottom = thisRef.el.parents('.operator-list').outerHeight() + elSpec.top;
+			// 		if (e.pageX < elSpec.left || e.pageX > elSpec.right || e.pageY < elSpec.top || e.pageY > elSpec.bottom) {
+			// 			$('#drag-trash-image').remove();
+			// 			var img = $('<img id="drag-trash-image" src="img/cancel_deny.png" style="position:absolute; top:' + (e.pageY + trashIconDistance) + 'px; left:' + (e.pageX - (trashIconSize + trashIconDistance)) + 'px; width:' + trashIconSize + 'px; height:' + trashIconSize + 'px; z-index:999;" />');
+			// 			img.appendTo("body");
+			// 		} else {
+			// 			$('#drag-trash-image').remove();
+			// 		}
+			// 	},
+			// 	mouseupCallback: function(e) {
+			// 		$('#drag-trash-image').remove();
+			// 		var elSpec = thisRef.el.parents('.operator-list').offset();
+			// 		elSpec.right = thisRef.el.outerWidth() + elSpec.left;
+			// 		elSpec.bottom = thisRef.el.outerHeight() + elSpec.top;
+			// 		if (e.pageX < elSpec.left || e.pageX > elSpec.right || e.pageY < elSpec.top || e.pageY > elSpec.bottom) {
+			// 			thisRef.destroy();
+			// 		}
+			// 	}
+			// });
 		};
 
 		this.configDialog = function() {
+			var _dialogContainer = $(this.dialogContainer);
+			var _arrowContainer = $(this.arrowContainer);
+			_dialogContainer.each(function() {
+				var _operator = $(this).data('operator');
+				var _fields = $(this).data('fields');
+				if (_operator && _fields) {
+					for (var j = 0; j < _fields.length; j++) {
+						_operator.configs[_fields[j].name] = _fields[j].getVal();
+					}
+				}
+			});
 			var fields = [];
 			var dialog = $(Operator.tpl.operatorConfigDialog.substitute({
 				"name": this.operator_obj.name,
+				"displayName": this.operator_obj.displayName,
 				"img-src": this.operator_obj.icon
 			}));
 			for (var i = 0; i < this.operator_obj.fields.length; i++) {
@@ -809,23 +525,41 @@ app_configuration_options = [
 				fields.push(theField);
 				theField.el.appendTo(dialog);
 			}
-			this.configOperatorModal = new Modal(dialog, {
-				title: this.operator_obj.displayName,
-				primary: "确定",
-				secondary: "取消",
-				primaryListener: function() {
-					thisRef.configOperatorModal.destroy();
-					for (var i = 0; i < fields.length; i++) {
-						var theField = fields[i];
-						thisRef.configs[theField.name] = theField.getVal();
+			_dialogContainer.html('');
+			_dialogContainer.append(dialog);
+			_arrowContainer.data('pointTo', this.el);
+			_arrowContainer.show();
+			collapseFormArrow.trigger();
+			_dialogContainer.data('operator', this);
+			// this.el.drag.pause();
+			_dialogContainer.data('fields', fields);
+			_dialogContainer.slideDown(200, function(){
+				var documentClickFunction = function(e) {
+					if ($(e.target).hasClass('.operator-config-dialog-container') || $(e.target).parents('.operator-config-dialog-container').length > 0) {
+						$(document).one('click.formSlide', documentClickFunction);
+					} else {
+						e.preventDefault();
+						e.stopPropagation();
+						_dialogContainer.each(function() {
+							var _operator = $(this).data('operator');
+							// _operator.el.drag.resume();
+							var _fields = $(this).data('fields');
+							if (_operator && _fields) {
+								for (var j = 0; j < _fields.length; j++) {
+									_operator.configs[_fields[j].name] = _fields[j].getVal();
+								}
+							}
+						});
+						_dialogContainer.slideUp(200);
+						_arrowContainer.hide();
 					}
-				}
+				};
+				$(document).one('click.formSlide', documentClickFunction);
 			});
-			this.configOperatorModal.show();
 		};
 
 		this.destroy = function() {
-			this.el.hide(200, function() {
+			this.el.slideUp(200, function() {
 				if (thisRef.belongToList && thisRef.belongToList instanceof Array) {
 					for (var i = thisRef.belongToList.length - 1; i >= 0; i--) {
 						if (thisRef.belongToList[i] === thisRef) 
@@ -840,11 +574,11 @@ app_configuration_options = [
 	};
 	Operator.tpl = {
 		button:
-			'<button type="button" class="btn btn-icon btn-default operator" data-toggle="tooltip" data-placement="bottom" title="#{displayName}">\
-				<div class="btn-content">\
-					<img src="#{img-src}" />\
+			'<div class="button button-inline operator">\
+				<div class="button-icon operator-icon">\
+					<img src="#{img-src}"/>\
 				</div>\
-			</button>',
+			</div>',
 		operatorIcon:
 			'<div class="operator-icon" data-name="#{name}" data-toggle="tooltip" data-placement="bottom" title="#{displayName}">\
 				<img src="#{img-src}"/>\
@@ -855,16 +589,15 @@ app_configuration_options = [
 			'<div class="add-operator">\
 			</div>',
 		operatorConfigDialog:
-			'<div class="add-operator">\
-				<div class="title-bar">#{name}</div>\
-				<div class="operator-icon operator-icon-static">\
-					<img src="#{img-src}"/>\
+			'<div class="operator-config-dialog-content">\
+				<div class="operator-config-dialog-content-header">\
+					<h4>#{displayName}</h4>\
 				</div>\
 			</div>'
 	};
 	Operator.spacename = "operator";
 
-	Operator.addOperator = function(to_el, list, item) {
+	Operator.addOperator = function(to_el, list, item, callback) {
 		if (!(to_el instanceof jQuery) && !(to_el instanceof Element) && (typeof to_el !== "string"))
 			throw "to_el argument must be an instance of jQuery, a jQuery selector or an instanceof Element";
 		to_el = $(to_el);
@@ -879,75 +612,7 @@ app_configuration_options = [
 			to_el.children('.btn-add').before(item.el);
 		else
 			item.el.appendTo(to_el);
-		item.el.show(200);
-	};
-	Operator.addOperatorDialog = function(to_el, list) {
-		var dialog = $(Operator.tpl.addOperatorDialog);
-		var title_bar = null;
-		var form = null;
-		var operator = null;
-		var fields = [];
-		myfields = fields;
-		for (var i = 0; i < operator_repository.length; i++) {
-			var operator_obj = operator_repository[i];
-			var operator_icon = $(Operator.tpl.operatorIcon.substitute({
-				"name": operator_obj.name,
-				"displayName": operator_obj.displayName,
-				"img-src": operator_obj.icon
-			}));
-			operator_icon.tooltip();
-			operator_icon.one('click', function(e) {
-				var offset = $(this).offset();
-				var parent_offset = $(this).parent().offset();
-				$(this).css('top', (offset.top - parent_offset.top) + 'px');
-				$(this).css('left', (offset.left - parent_offset.left) + 'px');
-				$(this).addClass('operator-icon-static');
-				$(this).tooltip('destroy');
-				brotherNodes = $(this).parent().find('.operator-icon');
-				for (var j = brotherNodes.length - 1; j >= 0; j--) {
-					if ($(brotherNodes[j]).data('name') !== $(this).data('name')) {
-						$(brotherNodes[j]).fadeOut(200, function(){
-							$(brotherNodes[j]).remove();
-						});
-					}
-				}
-				$(this).animate({
-					'top': '0px',
-					'left': '0px'
-				}, 200, function() {
-					operator = new Operator($(this).data('name'));
-					title_bar = $(Operator.tpl.operatorTitleBar.substitute({name:operator.operator_obj.displayName}));
-					dialog.append(title_bar);
-					form = $('<div></div>');
-					for (var j = 0; j < operator.operator_obj.fields.length; j++) {
-						var theFieldOption = operator.operator_obj.fields[j];
-						var theField = new theFieldOption.viewClass({
-							name: theFieldOption.name,
-							displayName: theFieldOption.displayName
-						});
-						if (typeof theFieldOption.defaultValue !== "undefined")
-							theField.setVal(theFieldOption.default);
-						fields.push(theField);
-						theField.el.appendTo(dialog);
-					}
-				});
-			});
-			operator_icon.appendTo(dialog);
-		}
-		this.addOperatorModal = new Modal(dialog, {
-			title: "添加执行器",
-			primary: "添加",
-			secondary: "取消",
-			primaryListener: function() {
-				Operator.addOperatorModal.destroy();
-				for (var i = 0; i < fields.length; i++) {
-					var theField = fields[i];
-					operator.configs[theField.name] = theField.getVal();
-				}
-				Operator.addOperator(to_el, list, operator);
-			}
-		});
-		this.addOperatorModal.show();
+		item.el.slideDown(200, callback);
 	};
 })();
 
@@ -996,15 +661,15 @@ app_configuration_options = [
 			}
 		};
 
-		this.destroy = function() {
-			this.el.hide(200, function() {
-				if (thisRef.belongToList && thisRef.belongToList instanceof Array) {
-					for (var i = thisRef.belongToList.length - 1; i >= 0; i--) {
-						if (thisRef.belongToList[i] === thisRef) 
-							thisRef.belongToList.splice(i, 1);
-					}
+		this.destroy = function(callback) {
+			for (var i = item.belongToList.length - 1; i >= 0; i--) {
+				if (item.belongToList[i] === item) {
+					item.belongToList.splice(i, 1);
 				}
-				thisRef.el.remove();
+			}
+			item.el.slideUp(200, function() {
+				item.el.remove();
+				if (typeof callback === "function") callback();
 			});
 		};
 	
@@ -1018,9 +683,11 @@ app_configuration_options = [
 					</div>\
 				</div>\
 				<div class="collapse-form-container">\
-					<div class="collapse-form-arrow"></div>\
 					<div class="collapse-form"></div>\
-					<div class="collapse-form-arrow-mask"></div>\
+					<div class="collapse-form-arrow-container collapse-form-arrow-container-top">\
+						<div class="collapse-form-arrow"></div>\
+						<div class="collapse-form-arrow-mask"></div>\
+					</div>\
 				</div>\
 			</div>'
 	};
@@ -1041,7 +708,7 @@ app_configuration_options = [
 			to_el.children('.btn-add').before(item.el);
 		else
 			item.el.appendTo(to_el);
-		item.el.show(200, callback);
+		item.el.slideDown(200, callback);
 	};
 })();
 

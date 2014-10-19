@@ -11,6 +11,20 @@ $bottom_tool_shadow_size: 3px;
 $top_tool_height: 30px;
 $top_tool_shadow_size: 3px;
 
+$main_bg_color: #f6f6f6;
+
+$sensors_container_gap_top: $top_tool_height + $top_tool_shadow_size + $header_height;
+$sensors_container_gap_bottom: $bottom_tool_height + $bottom_tool_shadow_size;
+
+$operators_container_gap_top: $top_tool_height + $top_tool_shadow_size + $header_height;
+$operators_container_gap_bottom: 0px;
+
+html, body, .main-container, .section {
+	background-color: $main_bg_color;
+	height: 100%;
+	overflow: scroll;
+}
+
 .header {
 	background-color: #f0f0ff;
 	padding: 0 5px;
@@ -24,14 +38,107 @@ $top_tool_shadow_size: 3px;
 	left: 0px;
 	z-index: 999;
 }
+a.action-nav {
+	color: #000;
+	text-decoration: none;
+	display: inline-block;
+	padding: 0 10px;
+	height: inherit;
+	line-height: inherit;
+	vertical-align: middle;
+	position: absolute;
+	top: 0px;
+}
+a.action-nav:active {
+	text-decoration: none;
+	background-color: rgba(0,0,0,0.5);
+	color: white;
+}
+a.action-nav:link {
+	color: #000;
+	text-decoration: none;
+}
+a.action-nav:visited {
+	color: #000;
+	text-decoration: none;
+}
+a.action-nav:hover {
+	color: #000;
+	text-decoration: none;
+}
+a.action-nav:focus {
+	color: #000;
+	text-decoration: none;
+}
+.nav-prev {
+	left: 0px;
+}
+.nav-next {
+	right: 0px;
+}
 
-.main-container {
-	margin-top: $top_tool_height + $top_tool_shadow_size + $header_height;
-	margin-bottom: $bottom_tool_height + $bottom_tool_shadow_size;
+.collapse-form-arrow-container {
+	width: $collapse_form_arrow_size;
+	height: 2 * $collapse_form_arrow_size;
+	position: absolute;
+}
+.collapse-form-arrow-container-left, .collapse-form-arrow-container-right {
+	margin-top: -$collapse_form_arrow_size;
+}
+.collapse-form-arrow-container-top, .collapse-form-arrow-container-bottom {
+	margin-left: -$collapse_form_arrow_size;
+}
+.collapse-form-arrow, .collapse-form-arrow-mask {
+	background-color: $collapse_form_bg_color;
+	width: $collapse_form_arrow_size * 1.414;
+	height: $collapse_form_arrow_size * 1.414;
+	position: absolute;
+	top: $collapse_form_arrow_size * (1 - 1/1.414);
+	left: $collapse_form_arrow_size * (1 - 1/1.414);
+	transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform-origin: 50% 50%;
+	-moz-transform-origin: 50% 50%;
+	-o-transform-origin: 50% 50%;
+	-webkit-transform-origin: 50% 50%;
+	-ms-transform-origin: 50% 50%;
+}
+.collapse-form-arrow {
+	box-shadow: 0 0 $collapse_form_shadow_size 0 $collapse_form_shadow_color inset;
+}
+.collapse-form-arrow-container-left .collapse-form-arrow-mask {
+	left: $collapse_form_arrow_size * (1 - 1/1.414) + $collapse_form_shadow_size / 1.414;
+}
+.collapse-form-arrow-container-right .collapse-form-arrow-mask {
+	left: $collapse_form_arrow_size * (1 - 1/1.414) - $collapse_form_shadow_size / 1.414;
+}
+.collapse-form-arrow-container-top .collapse-form-arrow-mask {
+	top: $collapse_form_arrow_size * (1 - 1/1.414) + $collapse_form_shadow_size / 1.414;
+}
+.collapse-form-arrow-container-bottom .collapse-form-arrow-mask {
+	bottom: $collapse_form_arrow_size * (1 - 1/1.414) - $collapse_form_shadow_size / 1.414;
+}
+
+.slide {
+	display: none;
+}
+.sensors-container {
+	margin-top: $sensors_container_gap_top;
+	margin-bottom: $sensors_container_gap_bottom;
+}
+.operators-container {
+	padding-top: $operators_container_gap_top - 2 * $collapse_form_shadow_size;
+	padding-bottom: $operators_container_gap_bottom;
+	background-color: white;
+	height: 100%;
 }
 
 .sensor-group {
 	border-bottom: 1px #cccccc solid;
+	background-color: white;
 }
 .sensor-list-container {
 	width: 100%;
@@ -93,28 +200,8 @@ $top_tool_shadow_size: 3px;
 	padding: 10px 10px+$collapse_form_shadow_size;
 	position: relative;
 }
-.collapse-form-arrow, .collapse-form-arrow-mask {
-	width: $collapse_form_arrow_size * 1.414;
-	height: $collapse_form_arrow_size * 1.414;
-	position: absolute;
-	left: 50%;
-	margin-left: -$collapse_form_arrow_size;
-	transform: rotate(45deg);
-	-moz-transform: rotate(45deg);
-	-o-transform: rotate(45deg);
-	-webkit-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	transform-origin: 50% 50%;
-	-moz-transform-origin: 50% 50%;
-	-o-transform-origin: 50% 50%;
-	-webkit-transform-origin: 50% 50%;
-	-ms-transform-origin: 50% 50%;
-}
-.collapse-form-arrow {
-	top: -$collapse_form_arrow_size / 1.414;
-}
-.collapse-form-arrow-mask {
-	top: ($collapse_form_shadow_size - $collapse_form_arrow_size) / 1.414;
+.collapse-form-container > .collapse-form-arrow-container {
+	top: -$collapse_form_arrow_size;
 }
 
 .add-sensor-group-button {
@@ -148,13 +235,101 @@ $top_tool_shadow_size: 3px;
 	vertical-align: middle;
 	text-align: center;
 	font-size: 14px;
+	position: relative;
 }
 .top-drawer-body {
 	height: 0px;
 	width: 100%;
 	overflow: scroll;
 }
-.top-drawer-sensor-list {
+.top-drawer-list {
 	height: auto;
 	width: 100%;
+}
+
+.operators-container {
+	overflow: hidden;
+}
+.operators-container > .row {
+	margin-top: $collapse_form_shadow_size;
+	height: 100%;
+	font-size: 0px;
+}
+.operators-container > .row > * {
+	font-size: medium;
+}
+.operator-list-container, .operator-config-dialog {
+	overflow: scroll;
+}
+.operator-list, .operators-config-form {
+	margin-top: $collapse_form_shadow_size;
+	margin-bottom: $collapse_form_shadow_size;
+}
+.operator-list-container {
+	display: inline-block;
+	width: $button_size + 2 * $button_gap;
+	height: 100%;
+	float: left;
+}
+.operator-config-dialog-container {
+	margin-left: $button_size + 2 * $button_gap;
+	height: 100%;
+	position: relative;
+}
+.operator-config-dialog {
+	margin-left: $collapse_form_arrow_size;
+	background-color: $collapse_form_bg_color;
+	box-shadow: 0 0 $collapse_form_shadow_size 0 $collapse_form_shadow_color inset;
+	height: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+}
+.operator-config-form {
+	margin: 0 $collapse_form_arrow_size + $collapse_form_shadow_size;
+}
+.operator-config-dialog-container > .collapse-form-arrow-container {
+	left: 0px;
+	top: 50%;
+	display: none;
+}
+
+.configurations-container {
+	margin-top: $header_height;
+	margin-bottom: 0px;
+}
+.configuration-list {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.confirmation-container, {
+	padding-top: $header_height;
+	padding-bottom: 0px;
+	height: 100%;
+	overflow: hidden;
+}
+.confirmation-canvas {
+	width: 100%;
+	height: 100%;
+}
+.completion-container {
+	margin-top: $header_height;
+	margin-bottom: 0px;
+	height: 100%;
+	overflow: hidden;
+}
+.completion {
+	height: 50px;
+	line-height: 50px;
+	vertical-align: middle;
+	white-space: nowrap;
+	vertical-align: middle;
+	margin-top: -25px;
+	position: relative;
+	top: 50%;
+	text-align: center;
+	font-size: 20px;
 }
